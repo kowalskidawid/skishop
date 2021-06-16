@@ -1,0 +1,62 @@
+<div>
+    <div class="jumbotron">
+        <h1 class="display-4">Sklep Narciarski!</h1>
+        <p class="lead">Znajdź produkty potrzebne do uprawiania sportów zimowych jak narty, snowboard lub ocieplane
+            kurtki.</p>
+        <hr class="my-4">
+        <p>Przejdź do dostępnej listy produktów lub skorzystaj z prostego wyszukiwania!</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" routerLink="/kategorie" role="button">Zobacz naszą ofertę</a>
+        </p>
+    </div>
+
+    <div class="col-md-12">
+        <h2>Popularne kategorie</h2>
+        <div class="row">
+            <div class="col-md-3" *ngFor="let category of response.categories">
+                <div class="card">
+                    <a [routerLink]="['/produkty', category.id]">
+                        <img class="card-img-top" src="{{ productThumbnail(category.thumbnail) }}"
+                             alt="{{ category.name }}">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <a [routerLink]="['/produkty', category.id]">{{ category.name }} ({{ category.count }})</a>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <h2>Ostatnio dodane</h2>
+        <div class="row">
+            <div class="col-md-3" *ngFor="let product of response.products">
+                <div class="card">
+                    <a [routerLink]="['/produkt', product.id]">
+                        <img class="card-img-top" src="{{ productThumbnail(product.thumbnail) }}"
+                             alt="{{ product.name }}">
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title text-center">
+                            <a [routerLink]="['/produkt', product.id]">{{ product.name }}</a>
+                        </h4>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-7 text-center">
+                                <h6 class="h-100 mb-0">{{ getPrice(product.price) }}</h6>
+                            </div>
+                            <div class="col-md-5 text-center">
+                                <button class="btn btn-outline-primary btn-block btn-sm"
+                                        (click)="addToCart(product.id)">
+                                    Dodaj
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

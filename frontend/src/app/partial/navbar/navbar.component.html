@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+    <a class="navbar-brand" [routerLink]="['/']">Sklep</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" [routerLink]="['/']" routerLinkActive="router-link-active">Strona główna <span
+                        class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/kategorie']">Kategorie</a>
+            </li>
+
+            <li class="nav-item dropdown" *ngIf="userDetails && userDetails.rule != 'USER'">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Zarządzaj sklepem
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/admin/produkty">Produkty</a>
+                    <a class="dropdown-item" href="/admin/kategorie">Kategorie produktów</a>
+                    <a class="dropdown-item" href="/admin/zamowienia">Zamówienia</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/admin/uzytkownicy" *ngIf="userDetails && userDetails.rule == 'ADMIN'">Użytkownicy</a>
+                </div>
+            </li>
+            <li class="nav-item" *ngIf="userDetails">
+                <a class="nav-link" [routerLink]="['/wyloguj']">Wyloguj się</a>
+            </li>
+            <li class="nav-item" *ngIf="!userDetails">
+                <a class="nav-link" [routerLink]="['/rejestracja']">Załóż konto</a>
+            </li>
+            <li class="nav-item" *ngIf="!userDetails">
+                <a class="nav-link" [routerLink]="['/logowanie']">Zaloguj się</a>
+            </li>
+        </ul>
+        <a class="mr-3" id="cart">
+            <a routerLink="/zloz-zamowienie">
+                <img src="assets/cart.svg" width="24">
+                <span *ngIf="productsInCart > 0">{{ productsInCart }}</span>
+            </a>
+        </a>
+        <form class="form-inline my-2 my-lg-0" [formGroup]="searchForm">
+            <input class="form-control mr-sm-2" type="text" placeholder="Szukaj" aria-label="Wyszukaj" formControlName="query" (keydown.enter)="search()">
+        </form>
+    </div>
+</nav>

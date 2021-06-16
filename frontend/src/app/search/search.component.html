@@ -1,0 +1,57 @@
+<div>
+    <div *ngIf="response.matched">
+        <h2>Szukasz: <b class="text-primary">{{ response.query }}</b></h2>
+        <div *ngIf="response.categories.length > 0">
+            <h3 class="mt-4">Kategorie</h3>
+            <div class="row">
+                <div class="col-md-3" *ngFor="let category of response.categories">
+                    <div class="card">
+                        <a [routerLink]="['/produkty', category.id]">
+                            <img class="card-img-top" src="{{ productThumbnail(category.thumbnail) }}"
+                                 alt="{{ category.name }}">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <a [routerLink]="['/produkty', category.id]">{{ category.name }} ({{ category.count }})</a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="response.products.length > 0">
+            <h3 class="mt-4">Produkty</h3>
+            <div class="row">
+                <div class="col-md-3" *ngFor="let product of response.products">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ productThumbnail(product.thumbnail) }}" alt="{{ product.name }}">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">
+                                <a [routerLink]="['/produkt', product.id]">{{ product.name }}</a>
+                            </h4>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <h6 class="h-100 mb-0">{{ product.price }} Zł</h6>
+                                </div>
+                                <div class="col-md-8 text-center">
+                                    <button class="btn btn-outline-primary btn-block btn-sm"
+                                            (click)="addToCart(product.id)">
+                                        Dodaj do koszyka
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!response.matched" class="text-center my-5 py-5">
+        <h2>Nie udało się znaleźć produktu ani kategorii.</h2>
+        <p>Możesz przejść do <a routerLink="/">strony głównej</a> lub do list <a routerLink="/kategorie">kategorii</a>.</p>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div>
+    <h2 class="my-5">Dodaj kategorię</h2>
+    <form class="col-md-8 mx-auto" (submit)="addCategory()" [formGroup]="categoryForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Nazwa kategorii</label>
+                    <input type="text" class="form-control" id="name" formControlName="name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Ikona</label>
+                    <input type="file" class="form-control-file">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mx-auto my-4">
+            <input type="submit" value="Zapisz" class="btn btn-outline-dark btn-lg btn-block">
+        </div>
+    </form>
+</div>

@@ -1,0 +1,48 @@
+<div>
+    <h2>Złóż zamówienie</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Produkt</th>
+                        <th>Ilość</th>
+                        <th>Cena</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let product of cartSummary.products; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>
+                            {{ product.name }}
+                        </td>
+                        <td>
+                            {{ product.quantity }}
+                        </td>
+                        <td>{{ getPrice(product.price) }}</td>
+                        <td>
+                            <button class="btn btn-outline-primary" (click)="decreaseQuantity(product.id)">-</button>
+                            <input type="text" class="mx-2" value="{{ product.quantity }}"
+                                   style="width: 30px; margin-top: 10px;">
+                            <button class="btn btn-outline-primary" (click)="increaseQuantity(product.id)">+</button>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2 *ngIf="cartSummary.totalPrice > 0">Do zapłaty: {{ getPrice(cartSummary.totalPrice) }}</h2>
+            <div class="mt-3">
+                <button class="btn btn-outline-dark btn-lg btn-block" (click)="pay()" [ngClass]="{'d-none': cartSummary.totalPrice == 0}">Zamów
+                    {{ getPrice(cartSummary.totalPrice) }}
+                </button>
+                <h3 *ngIf="cartSummary.totalPrice == 0" class="text-danger">Brak produktów w koszyku</h3>
+            </div>
+        </div>
+    </div>
+</div>

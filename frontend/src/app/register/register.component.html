@@ -1,0 +1,96 @@
+<div class="py-3 px-3 mt-4">
+    <h2>Zarejestruj się</h2>
+    <div class="alert alert-danger" *ngIf="serverError">
+        {{ serverError }}
+    </div>
+    <div class="row">
+        <form class="col-md-8 mx-auto" [formGroup]="userForm" (submit)="register()">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="first-name">Imię</label>
+                        <input type="text" class="form-control" id="first-name" formControlName="first_name">
+                        <small class="text-danger" *ngIf="(userForm.get('first_name').touched || invalidForm) && !userForm.get('first_name').valid">
+                            Wprowadź swoje imię
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="last-name">Nazwisko</label>
+                        <input type="text" class="form-control" id="last-name" formControlName="last_name">
+                        <small class="text-danger" *ngIf="(userForm.get('last_name').touched || invalidForm) && !userForm.get('last_name').valid">
+                            Wprowadź swoje nazwisko
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                        <small class="text-danger" *ngIf="(userForm.get('email').touched || invalidForm) && !userForm.get('email').valid">
+                            Wprowadź poprawny adres email
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="phone-number">Numer telefonu</label>
+                        <input type="text" class="form-control" id="phone-number" formControlName="phone_number">
+                        <small class="text-danger" *ngIf="(userForm.get('phone_number').touched || invalidForm) && !userForm.get('phone_number').valid">
+                            Wprowadź numer telefonu
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password">Hasło</label>
+                        <input type="password" class="form-control" id="password" formControlName="password">
+                        <small class="text-danger" *ngIf="(userForm.get('password').touched || invalidForm) && !userForm.get('password').valid">
+                            Wprowadź hasło
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <fieldset>
+                <legend>Dane adresowe</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="town">Miasto</label>
+                            <input type="text" class="form-control" id="town" formControlName="town">
+                            <small class="text-danger" *ngIf="(userForm.get('town').touched || invalidForm) && !userForm.get('town').valid">
+                                Wprowadź miasto
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="post-code">Kod pocztowy</label>
+                            <input type="text" class="form-control" id="post-code" formControlName="post_code">
+                            <small class="text-danger" *ngIf="(userForm.get('post_code').touched || invalidForm) && !userForm.get('post_code').valid">
+                                Wprowadź kod pocztowy
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="street">Uloca</label>
+                            <input type="text" class="form-control" id="street" formControlName="street">
+                            <small class="text-danger" *ngIf="(userForm.get('street').touched || invalidForm) && !userForm.get('street').valid">
+                                Wprowadź ulicę
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="my-4 text-center">
+                <input type="submit" class="btn btn-outline-dark" value="Zarejestruj się">
+            </div>
+        </form>
+    </div>
+</div>

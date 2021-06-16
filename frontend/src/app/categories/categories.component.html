@@ -1,0 +1,17 @@
+<div class="mt-4">
+    <h2>Kategorie</h2>
+    <div class="row">
+        <div class="col-md-3" *ngFor="let category of categories">
+            <div class="card">
+                <a [routerLink]="['/produkty', category.id]">
+                    <img class="card-img-top" src="{{ getThumbnailPath(category.thumbnail) }}" alt="{{ category.name }}">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title text-center">
+                        <a [routerLink]="['/produkty', category.id]">{{ category.name }} ({{ category.count }})</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

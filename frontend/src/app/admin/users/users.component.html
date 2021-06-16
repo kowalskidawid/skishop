@@ -1,0 +1,39 @@
+<div>
+    <h2>Użytkownicy ({{ response.count }}) </h2>
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Imię i Nazwisko</th>
+                        <th>Adres Dostawy</th>
+                        <th>Uprawninia</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of response.users;let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ user.firstName }} {{ user.lastName }}</td>
+                        <td>{{ user.address.city }}, {{ user.address.zipCode }} {{ user.address.street }}</td>
+                        <td>{{ getRuleText(user.rule) }}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ...
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" (click)="changeRule(user.id, 'USER')" *ngIf="user.rule != 'USER'">Zmień na: Zwykły użytkownik</button>
+                                    <button class="dropdown-item" (click)="changeRule(user.id, 'SELLER')" *ngIf="user.rule != 'SELLER'">Zmień na: Sprzedawca</button>
+                                    <button class="dropdown-item" (click)="changeRule(user.id, 'ADMIN')" *ngIf="user.rule != 'ADMIN'">Zmień na: Administrator</button>
+                                    <button class="dropdown-item" (click)="delete(user.id)">Usuń</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

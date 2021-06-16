@@ -1,0 +1,52 @@
+<div class="mt-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1>Kategorie ({{ response.count }}) </h1>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-outline-primary btn-block btn-lg" [routerLink]="['/admin/kategorie/dodaj']">Dodaj</a>
+        </div>
+    </div>
+    <div class="alert alert-danger" *ngIf="alertMessage">
+        {{ alertMessage }}
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nazwa</th>
+                    <th>Ilość produktów</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of response.categories;let index = index;">
+                    <th>{{ index }}</th>
+                    <th>{{ category.name }}</th>
+                    <th>{{ category.count }}</th>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ...
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" [routerLink]="['/admin/produkty', category.id, '1']">Lista produktów</a>
+                                <a class="dropdown-item" [routerLink]="['/admin/kategorie', category.id, 'edytuj']">Edytuj</a>
+                                <button class="dropdown-item" href="#" (click)="delete(category)">Usuń</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Nazwa</th>
+                    <th>Ilość produktów</th>
+                    <th>Akcje</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

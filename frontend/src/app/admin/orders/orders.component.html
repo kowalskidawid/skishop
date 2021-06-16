@@ -1,0 +1,42 @@
+<div>
+    <h2>Lista zamowień ({{ response.count }})</h2>
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Status</th>
+                    <th>Produkty</th>
+                    <th>Odbiorca</th>
+                    <th>Akcje</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let order of response.orders; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td [ngClass]="{'alert-success': order.status == 'DELIVERED'}">
+                        {{ getStatusText(order.status) }}
+                    </td>
+                    <td>
+                        <p *ngFor="let product of order.products">
+                            {{ product.quantity }} x <a
+                                [routerLink]="['/produkt', product.product.id]">{{ product.product.name }}</a>
+                        </p>
+                    </td>
+                    <td>
+                        <h4>{{ order.user.firstName }} {{ order.user.lastName }}</h4>
+                        <p>{{ order.user.phone }} - {{ order.user.email }}</p>
+                        <h4>Adres:</h4>
+                        <p>{{ order.user.address.city }}
+                            , {{ order.user.address.zipCode }} {{ order.user.address.street }}</p>
+                    </td>
+                    <td>
+                        <button *ngIf="order.status != 'DELIVERED'" (click)="changeStatus(order)">Oznacz jako: {{ getNextStatus(order.status) }}</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

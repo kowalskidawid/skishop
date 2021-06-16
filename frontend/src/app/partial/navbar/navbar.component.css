@@ -1,0 +1,19 @@
+#cart a {
+    color: white;
+}
+
+#cart a span {
+    background: red;
+    padding: 2px 7px;
+    font-size: 100%;
+    position: relative;
+    z-index: 3;
+    border-radius: 100%;
+    top: -11px;
+    right: 6px;
+}
+
+#cart a img {
+    position: relative;
+    z-index: 2;
+}

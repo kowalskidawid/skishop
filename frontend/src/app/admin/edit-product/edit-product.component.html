@@ -1,0 +1,68 @@
+<div>
+    <h2 class="mb-4">Edytuj produkt</h2>
+    <div class="alert alert-danger" role="alert" *ngIf="invalidForm">
+        Wprowadź poprawnę informację aby dodać produkt!
+    </div>
+    <form class="col-md-8 mx-auto" (submit)="editProduct()" [formGroup]="productForm">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="price">Cena</label>
+                <input type="number" step="0.01" min="0.01" class="form-control" id="price" formControlName="price">
+                <small class="text-danger"
+                       *ngIf="(productForm.get('price').touched || invalidForm) && !productForm.get('price').valid">
+                    Wprowadź poprawną cenę
+                </small>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label for="name">Nazwa produktu</label>
+                <input type="text" class="form-control" id="name" formControlName="name">
+                <small class="text-danger"
+                       *ngIf="(productForm.get('name').touched || invalidForm) && !productForm.get('name').valid">
+                    Wprowadź nazwę produktu
+                </small>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label for="description">Opis</label>
+                <textarea rows="6" class="form-control" id="description" formControlName="description"></textarea>
+                <small class="text-danger"
+                       *ngIf="(productForm.get('description').touched || invalidForm) && !productForm.get('description').valid">
+                    Wprowadź nazwę produktu
+                </small>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label for="category">Kategoria</label>
+                <select class="form-control" id="category" formControlName="category">
+                    <option value="">Wybierz kategorie...</option>
+                    <option *ngFor="let cateogry of categories" value="{{ cateogry.id }}">
+                        {{ cateogry.name }}
+                    </option>
+                </select>
+                <small class="text-danger"
+                       *ngIf="(productForm.get('category').touched || invalidForm) && !productForm.get('category').valid">
+                    Wprowadź nazwę produktu
+                </small>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label for="in-stock">Ilość w magazynie</label>
+                <input type="text" class="form-control" id="in-stock" formControlName="inStock">
+                <small class="text-danger"
+                       *ngIf="(productForm.get('inStock').touched || invalidForm) && !productForm.get('inStock').valid">
+                    Wprowadź poprawną ilość produktów
+                </small>
+            </div>
+        </div>
+        <div class="col-md-6 mx-auto">
+            <input type="submit" value="Zapisz" class="btn btn-outline-dark btn-lg btn-block">
+        </div>
+    </form>
+</div>

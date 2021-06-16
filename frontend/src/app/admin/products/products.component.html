@@ -1,0 +1,58 @@
+<div>
+    <div class="row">
+        <div class="col-md-9">
+            <h2>Produkty ({{ response.count }})</h2>
+        </div>
+        <div class="col-md-3">
+            <a routerLink="/admin/produkty/dodaj" class="btn btn-outline-primary btn-lg btn-block">Dodaj produkt</a>
+        </div>
+    </div>
+    <div class="col-12 mt-4">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Cena</th>
+                        <th>Nazwa</th>
+                        <th>Kategoria</th>
+                        <th>W magazynie</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of response.products; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ getPrice(product.price) }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>
+                            <a [routerLink]="['/admin/produkty', product.category.id]">{{ product.category.categoryName }}</a>
+                        </td>
+                        <td [ngClass]="{'alert alert-danger': product.inStock <= 10}">{{ product.inStock }}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-link" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ...
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" [routerLink]="['/admin/produkt', product.id, 'edytuj']">Edytuj</a>
+                                    <button class="dropdown-item" (click)="delete(product.id)">Usuń</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Cena</th>
+                        <th>Nazwa</th>
+                        <th>Kategoria</th>
+                        <th>W magazynie</th>
+                        <th>Akcje</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

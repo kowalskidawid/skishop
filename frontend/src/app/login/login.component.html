@@ -1,0 +1,36 @@
+<div>
+    <h2>Zaloguj się</h2>
+    <div class="alert alert-danger my-3" *ngIf="serverError">
+        Nieprawidłowy adres email lub hasło!
+    </div>
+    <div class="row">
+        <form class="col-md-8 mx-auto" [formGroup]="userForm" (submit)="login()">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                        <small class="text-danger"
+                               *ngIf="(userForm.get('email').touched || invalidForm) && !userForm.get('email').valid">
+                            Wprowadź poprawny adres email
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password">Hasło</label>
+                        <input type="password" class="form-control" id="password" formControlName="password">
+                        <small class="text-danger"
+                               *ngIf="(userForm.get('password').touched || invalidForm) && !userForm.get('password').valid">
+                            Wprowadź hasło
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-4 text-center">
+                <input type="submit" class="btn btn-outline-dark" value="Zaloguj się">
+            </div>
+        </form>
+    </div>
+</div>
